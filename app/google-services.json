@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "872884117887",
+    "firebase_url": "https://ansimhaeyoyang.firebaseio.com",
+    "project_id": "ansimhaeyoyang",
+    "storage_bucket": "ansimhaeyoyang.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:872884117887:android:8ba6dc375d4b2639",
+        "android_client_info": {
+          "package_name": "com.team14.socialapp.ansimhaeyoyang"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "872884117887-lten8op074ke2jk9q0c29d1g7nccm24k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAt3MKPOzI30hsu2FDXejHsYnz8Dv0epl8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
