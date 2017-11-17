@@ -1,19 +1,14 @@
 package com.team14.socialapp.ansimhaeyoyang;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -25,6 +20,7 @@ import com.team14.socialapp.ansimhaeyoyang.model.User;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private static final String TAG = "MainActivity";
@@ -32,15 +28,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FirebaseAuth firebaseAuth;
     private DatabaseReference mDatabase;
 
-    @BindView(R.id.textviewPatientName)
+    @BindView(R.id.textView_main_user_name)
+    TextView textViewUserName;
+    @BindView(R.id.textView_main_patient_name)
     TextView textViewPatientName;
-    @BindView(R.id.buttonLogout)
+    @BindView(R.id.button_logout)
     Button buttonLogout;
-    @BindView(R.id.textviewDelete)
-    TextView textivewDelete;
+    @BindView(R.id.button_menu_board)
+    BootstrapButton buttonMenuBoard;
+    @BindView(R.id.button_menu_gallery_patient)
+    BootstrapButton buttonMenuGalleryPatient;
+    @BindView(R.id.button_menu_gallery_family)
+    BootstrapButton buttonMenuGalleryFamily;
+    @BindView(R.id.button_menu_yoyang_program)
+    BootstrapButton buttonMenuYoyangProgram;
+    //@BindView(R.id.textviewDelete)
+    //TextView textivewDelete;
 
-
-    //private User userInfo;
     private String userUID;
 
     private User userInfo;
@@ -55,15 +59,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        //initializing firebase authentication object
         firebaseAuth = FirebaseAuth.getInstance();
-        //유저가 로그인 하지 않은 상태라면 null 상태이고 이 액티비티를 종료하고 로그인 액티비티를 연다.
         if(firebaseAuth.getCurrentUser() == null) {
             finish();
             startActivity(new Intent(this, SignInActivity.class));
         }
 
-        //유저가 있다면, null이 아니면 계속 진행
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
 
@@ -76,7 +77,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         userInfo = new User();
                         userInfo = dataSnapshot.getValue(User.class);
-                        textViewPatientName.setText("반갑습니다.\n"+"요양원 입주자님 성함 : "+userInfo.getPatientName() +"\n보호자님 성함 :"+userInfo.getUserName());
+                        textViewPatientName.setText(userInfo.getPatientName()+" 님의");
+                        textViewUserName.setText("보호자 "+userInfo.getUserName()+" 님");
                     }
 
                     @Override
@@ -87,10 +89,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 });
 
-
-        //logout button event
         buttonLogout.setOnClickListener(this);
-        textivewDelete.setOnClickListener(this);
 
 
     }
@@ -102,6 +101,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             finish();
             startActivity(new Intent(this, SignInActivity.class));
         }
+
+        /*
         //회원탈퇴를 클릭하면 회원정보를 삭제한다. 삭제전에 컨펌창을 하나 띄워야 겠다.
         if(view == textivewDelete) {
             AlertDialog.Builder alert_confirm = new AlertDialog.Builder(MainActivity.this);
@@ -129,5 +130,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             });
             alert_confirm.show();
         }
+        */
+    }
+
+    @OnClick(R.id.button_menu_board)
+    public void onClickMenuBoard(){
+
+    }
+    @OnClick(R.id.button_menu_gallery_patient)
+    public void onClickMenuGalleryPatient(){
+
+    }
+    @OnClick(R.id.button_menu_gallery_family)
+    public void onClickMenuGalleryFamily(){
+        startActivity(new Intent(this, FamilyGalleryActivity.class));
+    }
+    @OnClick(R.id.button_menu_yoyang_program)
+    public void onClickMenuYoyangProgram(){
+
     }
 }

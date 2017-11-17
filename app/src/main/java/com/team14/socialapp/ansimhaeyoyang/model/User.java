@@ -15,6 +15,12 @@ public class User {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
+    public User(String userUID, String userName, String patientName) {
+        this.userUID = userUID;
+        this.userName = userName;
+        this.patientName = patientName;
+    }
+
     public User(String userUID, String userEmail, String userName, String patientName, String patientBirth) {
         this.userUID = userUID;
         this.userEmail = userEmail;

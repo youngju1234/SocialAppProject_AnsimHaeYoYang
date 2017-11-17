@@ -38,8 +38,7 @@ public class SignInActivity extends AppCompatActivity  implements View.OnClickLi
         if(firebaseAuth.getCurrentUser() != null){
             //이미 로그인 되었다면 이 액티비티를 종료함
             finish();
-            //그리고 profile 액티비티를 연다.
-            startActivity(new Intent(getApplicationContext(), MainActivity.class)); //추가해 줄 MainActivity
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }
         //initializing views
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
