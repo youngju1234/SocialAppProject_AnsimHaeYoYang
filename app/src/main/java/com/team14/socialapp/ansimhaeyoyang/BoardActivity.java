@@ -10,8 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-import butterknife.OnClick;
-
 public class BoardActivity extends AppCompatActivity {
     static final String[] LIST_MENU = {"식대비 관련 안내 드립니다. ", "정신건강을 위한 10가지 수칙!", "마사지 꿀팁", "마사지 꿀팁", "마사지 꿀팁", "마사지 꿀팁", "마사지 꿀팁", "마사지 꿀팁", "마사지 꿀팁", "마사지 꿀팁", "마사지 꿀팁", "마사지 꿀팁", "마사지 꿀팁", "마사지 꿀팁", "마사지 꿀팁", "마사지 꿀팁"} ;
 
@@ -31,7 +29,7 @@ public class BoardActivity extends AppCompatActivity {
             public void onItemClick(AdapterView parent, View v, int position, long id) {
                 Intent intent = new Intent(
                         getApplicationContext(), // 현재화면의 제어권자
-                        BoarddetailActivity.class); //
+                        BoardDetailActivity.class); //
                 startActivity(intent);
 
 

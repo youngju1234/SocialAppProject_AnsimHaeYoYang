@@ -25,8 +25,11 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".FindActivity" />
         <activity android:name=".SignUpActivity" />
+        <activity android:name=".BoardActivity" />
+        <activity android:name=".BoardDetailActivity" />
+        <activity android:name=".BoardWriteActivity" />
         <activity android:name=".FamilyGalleryActivity" />
-        <activity android:name=".FamilyGalleryWriteActivity"></activity>
+        <activity android:name=".FamilyGalleryWriteActivity"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"
