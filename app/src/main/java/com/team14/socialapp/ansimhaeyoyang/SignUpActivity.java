@@ -60,7 +60,7 @@ public class SignUpActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        if(firebaseAuth.getCurrentUser() != null){
+        if (firebaseAuth.getCurrentUser() != null) {
             finish();
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }
@@ -68,7 +68,7 @@ public class SignUpActivity extends AppCompatActivity {
 
 
     @OnClick(R.id.buttonSignup)
-    public void onClickSignUpButton(){
+    public void onClickSignUpButton() {
 
         email = editTextEmail.getText().toString().trim();
         password = editTextPassword.getText().toString().trim();
@@ -77,18 +77,18 @@ public class SignUpActivity extends AppCompatActivity {
         patientName = editTextPatientName.getText().toString().trim();
         patientBirth = editTextPatientBirth.getText().toString().trim();
 
-        if(!validateForm()){
+        if (!validateForm()) {
             return;
         }
 
-        userInfo = new User(null,email,userName,patientName,patientBirth);
+        userInfo = new User(null, email, userName, patientName, patientBirth);
 
         firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             onAuthSuccess(task.getResult().getUser());
                         } else {
                             Toast.makeText(SignUpActivity.this, "SignUp Failed.", Toast.LENGTH_SHORT).show();
@@ -101,42 +101,42 @@ public class SignUpActivity extends AppCompatActivity {
     private boolean validateForm() {
         boolean result = true;
 
-        if(TextUtils.isEmpty(email)){
+        if (TextUtils.isEmpty(email)) {
             Toast.makeText(this, "이메일을 입력해주세요.", Toast.LENGTH_SHORT).show();
             result = false;
         }
-        if(TextUtils.isEmpty(password)){
+        if (TextUtils.isEmpty(password)) {
             Toast.makeText(this, "비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
             result = false;
         }
-        if(TextUtils.isEmpty(userName)){
+        if (TextUtils.isEmpty(userName)) {
             Toast.makeText(this, "이름을 입력해주세요.", Toast.LENGTH_SHORT).show();
             result = false;
         }
-        if(TextUtils.isEmpty(patientName)){
+        if (TextUtils.isEmpty(patientName)) {
             Toast.makeText(this, "요양원 입주자의 이름을 입력해주세요.", Toast.LENGTH_SHORT).show();
             result = false;
         }
-        if(TextUtils.isEmpty(patientBirth)){
+        if (TextUtils.isEmpty(patientBirth)) {
             Toast.makeText(this, "요양원 입주자의 생년월일을 입력해주세요.", Toast.LENGTH_SHORT).show();
             result = false;
         }
-        if(TextUtils.isEmpty(checkPassword)){
+        if (TextUtils.isEmpty(checkPassword)) {
             Toast.makeText(this, "비밀번호 확인란을 입력해주세요.", Toast.LENGTH_SHORT).show();
             result = false;
         }
 
-        if(password.length()<6){
+        if (password.length() < 6) {
             Toast.makeText(this, "6자리 이상의 비밀번호로 설정해주세요.", Toast.LENGTH_SHORT).show();
             result = false;
         }
 
-        if(patientBirth.length()!=6){
+        if (patientBirth.length() != 6) {
             Toast.makeText(this, "생년월일은 YYMMDD 형태로 입력해주세요.", Toast.LENGTH_SHORT).show();
             result = false;
         }
 
-        if(!password.equals(checkPassword)){
+        if (!password.equals(checkPassword)) {
             Toast.makeText(this, "비밀번호가 일치하지 않습니다. 다시 입력해주세요.", Toast.LENGTH_SHORT).show();
             result = false;
         }

@@ -36,7 +36,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         cardView.setUserActionListener(new CustomCardView.UserActionListener() {
             @Override
             public void onImageClicked() {
-                Toast.makeText(context, "image "+position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "image " + position, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -51,7 +51,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
         public ViewHolder(View card) {
             super(card);
-            cardView = (CustomCardView)card;
+            cardView = (CustomCardView) card;
         }
     }
 }
