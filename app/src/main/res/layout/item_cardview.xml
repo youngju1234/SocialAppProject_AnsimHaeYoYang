@@ -4,122 +4,125 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/cardview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp">
+        android:layout_margin="16dp"
+        android:id="@+id/cardview"
+        >
 
         <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
             <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#eee"
-                android:orientation="vertical">
+                android:background="#eee">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
-                    android:layout_marginBottom="1dp"
-                    android:background="#fff"
                     android:paddingLeft="16dp"
-                    android:paddingRight="16dp">
+                    android:paddingRight="16dp"
+                    android:background="#fff"
+                    android:layout_marginBottom="1dp">
 
                     <ImageView
-                        android:id="@+id/imageView"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:layout_centerVertical="true" />
+                        android:id="@+id/imageView"
+                        android:layout_centerVertical="true"
+                         />
 
                     <LinearLayout
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
                         android:layout_toRightOf="@+id/imageView"
-                        android:orientation="vertical">
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp">
 
                         <TextView
-                            android:id="@+id/tv_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="###님의 가족"
                             android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="###님의 가족"
+                            android:id="@+id/tv_title"
                             android:textSize="16dp" />
 
                         <TextView
-                            android:id="@+id/tv_date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="2017/11/17"
                             android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:text="2017/11/17"
+                            android:id="@+id/tv_date"
                             android:textSize="13dp" />
                     </LinearLayout>
                 </RelativeLayout>
             </LinearLayout>
 
             <RelativeLayout
-                android:id="@+id/rl_image"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:id="@+id/rl_image">
 
                 <ImageView
-                    android:id="@+id/iv_image"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/family4" />
+                    android:src="@drawable/family4"
+                    android:id="@+id/iv_image" />
 
             </RelativeLayout>
 
             <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#ddd"
-                android:orientation="vertical">
+                android:background="#ddd">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="1dp"
+                    android:padding="16dp"
                     android:background="#fff"
-                    android:padding="16dp">
+                    android:layout_marginBottom="1dp">
 
                     <TextView
-                        android:id="@+id/tv_content"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="할아버지 잘 지내시나요 보고싶어요!" />
+                        android:text="할아버지 잘 지내시나요 보고싶어요!"
+                        android:id="@+id/tv_content" />
                 </RelativeLayout>
             </LinearLayout>
 
             <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#ddd"
-                android:orientation="horizontal">
+                android:background="#ddd">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:layout_marginBottom="1dp"
                     android:background="#fff"
+                    android:layout_marginBottom="1dp"
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp">
 
                     <TextView
-                        android:id="@+id/tv_writer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
                         android:text="작성자 : 이영주"
-                        android:textAppearance="?android:attr/textAppearanceSmall" />
+                        android:id="@+id/tv_writer"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true" />
                 </RelativeLayout>
             </LinearLayout>
         </LinearLayout>

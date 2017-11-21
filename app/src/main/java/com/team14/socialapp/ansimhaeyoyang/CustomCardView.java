@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.team14.socialapp.ansimhaeyoyang.model.GalleryItem;
-import com.team14.socialapp.ansimhaeyoyang.util.TypefaceUtil;
 
 /**
  * Created by dudwn on 2017-11-17.
@@ -60,7 +59,6 @@ public class CustomCardView extends CardView {
     }
 
     public void init(Context context, AttributeSet attrs, int defStyleAttr) {
-
         String infService = Context.LAYOUT_INFLATER_SERVICE;
         LayoutInflater li = (LayoutInflater) getContext().getSystemService(infService);
         View v = li.inflate(R.layout.item_cardview, this, true);
@@ -76,15 +74,15 @@ public class CustomCardView extends CardView {
         imageView.setOnClickListener(mOnClickListener);
     }
 
-    View.OnClickListener mOnClickListener = new View.OnClickListener() {
+    View.OnClickListener mOnClickListener = new View.OnClickListener(){
 
         @Override
         public void onClick(View v) {
-            if (mUserActionListener == null) {
+            if(mUserActionListener == null) {
                 return;
             }
 
-            if (v == imageView) {
+            if(v == imageView) {
                 mUserActionListener.onImageClicked();
             }
         }

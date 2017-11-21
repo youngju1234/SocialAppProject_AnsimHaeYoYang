@@ -2,12 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.team14.socialapp.ansimhaeyoyang">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA" />
-
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -25,6 +19,7 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".FindActivity" />
         <activity android:name=".SignUpActivity" />
+<<<<<<< HEAD
         <activity android:name=".BoardActivity" />
         <activity android:name=".BoardDetailActivity" />
         <activity android:name=".BoardWriteActivity" />
@@ -40,6 +35,9 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
+=======
+        <activity android:name=".FamilyGalleryActivity"></activity>
+>>>>>>> parent of e5ea1d8... 영주 갤러리
     </application>
 
 </manifest>

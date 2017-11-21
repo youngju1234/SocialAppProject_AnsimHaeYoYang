@@ -22,7 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private static final String TAG = "MainActivity";
 
     private FirebaseAuth firebaseAuth;
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         firebaseAuth = FirebaseAuth.getInstance();
-        if (firebaseAuth.getCurrentUser() == null) {
+        if(firebaseAuth.getCurrentUser() == null) {
             finish();
             startActivity(new Intent(this, SignInActivity.class));
         }
@@ -77,8 +77,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         userInfo = new User();
                         userInfo = dataSnapshot.getValue(User.class);
-                        textViewPatientName.setText(userInfo.getPatientName() + " 님의");
-                        textViewUserName.setText("보호자 " + userInfo.getUserName() + " 님");
+                        textViewPatientName.setText(userInfo.getPatientName()+" 님의");
+                        textViewUserName.setText("보호자 "+userInfo.getUserName()+" 님");
                     }
 
                     @Override
@@ -134,22 +134,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @OnClick(R.id.button_menu_board)
+<<<<<<< HEAD
     public void onClickMenuBoard() {
         startActivity(new Intent(this, BoardActivity.class));
-    }
+=======
+    public void onClickMenuBoard(){
 
+>>>>>>> parent of e5ea1d8... 영주 갤러리
+    }
     @OnClick(R.id.button_menu_gallery_patient)
-    public void onClickMenuGalleryPatient() {
+    public void onClickMenuGalleryPatient(){
 
     }
-
     @OnClick(R.id.button_menu_gallery_family)
-    public void onClickMenuGalleryFamily() {
+    public void onClickMenuGalleryFamily(){
         startActivity(new Intent(this, FamilyGalleryActivity.class));
     }
-
     @OnClick(R.id.button_menu_yoyang_program)
-    public void onClickMenuYoyangProgram() {
+    public void onClickMenuYoyangProgram(){
 
     }
 }
