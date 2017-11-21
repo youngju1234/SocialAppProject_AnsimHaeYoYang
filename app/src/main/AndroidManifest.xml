@@ -41,6 +41,7 @@
         <activity android:name=".BoardActivity" />
         <activity android:name=".BoarddetailActivity" />
         <activity android:name=".BoardWriteActivity"></activity>
+
     </application>
 
 </manifest>
