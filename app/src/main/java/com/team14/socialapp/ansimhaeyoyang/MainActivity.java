@@ -135,9 +135,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @OnClick(R.id.button_menu_board)
 <<<<<<< HEAD
+<<<<<<< HEAD
     public void onClickMenuBoard() {
         startActivity(new Intent(this, BoardActivity.class));
 =======
+=======
+>>>>>>> parent of e5ea1d8... 영주 갤러리
     public void onClickMenuBoard(){
 
 >>>>>>> parent of e5ea1d8... 영주 갤러리

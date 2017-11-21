@@ -20,6 +20,7 @@
         <activity android:name=".FindActivity" />
         <activity android:name=".SignUpActivity" />
 <<<<<<< HEAD
+<<<<<<< HEAD
         <activity android:name=".BoardActivity" />
         <activity android:name=".BoardDetailActivity" />
         <activity android:name=".BoardWriteActivity" />
@@ -35,6 +36,9 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
+=======
+        <activity android:name=".FamilyGalleryActivity"></activity>
+>>>>>>> parent of e5ea1d8... 영주 갤러리
 =======
         <activity android:name=".FamilyGalleryActivity"></activity>
 >>>>>>> parent of e5ea1d8... 영주 갤러리
