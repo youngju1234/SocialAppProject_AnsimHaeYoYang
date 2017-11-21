@@ -37,6 +37,10 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
+
+        <activity android:name=".BoardActivity" />
+        <activity android:name=".BoarddetailActivity" />
+        <activity android:name=".BoardWriteActivity"></activity>
     </application>
 
 </manifest>

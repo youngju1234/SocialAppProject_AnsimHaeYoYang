@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @OnClick(R.id.button_menu_board)
     public void onClickMenuBoard() {
-
+        startActivity(new Intent(this, BoardActivity.class));
     }
 
     @OnClick(R.id.button_menu_gallery_patient)
