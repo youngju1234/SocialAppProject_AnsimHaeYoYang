@@ -22,11 +22,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"
+            android:launchMode="singleTop"
+            />
         <activity android:name=".FindActivity" />
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".FamilyGalleryActivity" />
-        <activity android:name=".FamilyGalleryWriteActivity"></activity>
+        <activity android:name=".FamilyGalleryActivity" android:noHistory="true" />
+        <activity android:name=".FamilyGalleryWriteActivity">
+        </activity>
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -39,8 +42,8 @@
         </provider>
 
         <activity android:name=".BoardActivity" />
-        <activity android:name=".BoarddetailActivity" />
-        <activity android:name=".BoardWriteActivity"></activity>
+        <activity android:name=".BoardDetailActivity" />
+        <activity android:name=".BoardWriteActivity"/>
 
     </application>
 

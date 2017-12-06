@@ -73,7 +73,7 @@
                     android:id="@+id/iv_image"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/family4" />
+                    />
 
             </RelativeLayout>
 
@@ -104,6 +104,7 @@
                 android:background="#ddd"
                 android:orientation="horizontal">
 
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
@@ -113,12 +114,22 @@
                     android:paddingRight="16dp">
 
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="작성자: "
+                        android:layout_marginLeft="10dp"
+                        android:layout_centerVertical="true"
+                        />
+
+                    <TextView
                         android:id="@+id/tv_writer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:text="작성자 : 이영주"
+                        android:text="이영주"
+                        android:layout_marginRight="10dp"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
                 </RelativeLayout>
             </LinearLayout>

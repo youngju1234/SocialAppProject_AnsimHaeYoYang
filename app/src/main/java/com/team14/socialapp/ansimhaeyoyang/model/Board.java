@@ -1,21 +1,23 @@
 package com.team14.socialapp.ansimhaeyoyang.model;
 
-import com.team14.socialapp.ansimhaeyoyang.model.User;
+import java.io.Serializable;
 
-/**
- * Created by dudwn on 2017-11-17.
- */
-
-public class GalleryItem {
-
+public class Board implements Serializable {
+    private String key;
     private String date;
     private String content;
     private String title;
-    private String photoPath;
     private User user;
-    private String writer;
 
-    public GalleryItem() {
+    public Board() {
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getDate() {
@@ -42,14 +44,6 @@ public class GalleryItem {
         this.title = title;
     }
 
-    public String getPhotoPath() {
-        return photoPath;
-    }
-
-    public void setPhotoPath(String photoPath) {
-        this.photoPath = photoPath;
-    }
-
     public User getUser() {
         return user;
     }
@@ -58,11 +52,4 @@ public class GalleryItem {
         this.user = user;
     }
 
-    public String getWriter() {
-        return writer;
-    }
-
-    public void setWriter(String writer) {
-        this.writer = writer;
-    }
 }

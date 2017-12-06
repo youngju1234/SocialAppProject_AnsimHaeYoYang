@@ -1,8 +1,10 @@
 package com.team14.socialapp.ansimhaeyoyang;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -10,7 +12,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.team14.socialapp.ansimhaeyoyang.model.GalleryItem;
-import com.team14.socialapp.ansimhaeyoyang.util.TypefaceUtil;
 
 /**
  * Created by dudwn on 2017-11-17.
@@ -24,6 +25,7 @@ public class CustomCardView extends CardView {
     private ImageView imageView;
     private TextView contentTextview;
     private TextView writerTextview;
+    private Uri photoUri;
 
     private UserActionListener mUserActionListener;
 
@@ -51,7 +53,11 @@ public class CustomCardView extends CardView {
     }
 
     public void setData(GalleryItem item) {
-        Glide.with(getContext()).load(item.getImage()).into(imageView);
+        Log.d("########",item.getPhotoPath());
+        if (item.getPhotoPath() != null) {
+            photoUri = Uri.parse(item.getPhotoPath());
+            Glide.with(this.getContext()).load(Uri.parse(item.getPhotoPath())).into(imageView);
+        }
         titleTextview.setText(item.getTitle());
         contentTextview.setText(item.getContent());
         writerTextview.setText(item.getWriter());

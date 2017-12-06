@@ -8,24 +8,36 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.beardedhen.androidbootstrap.BootstrapButton;
+import com.beardedhen.androidbootstrap.BootstrapEditText;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.team14.socialapp.ansimhaeyoyang.model.GalleryItem;
+import com.team14.socialapp.ansimhaeyoyang.model.User;
 import com.team14.socialapp.ansimhaeyoyang.util.OnPermssionCallBackListener;
 import com.team14.socialapp.ansimhaeyoyang.util.ProviderUtil;
 import com.team14.socialapp.ansimhaeyoyang.util.RuntimeUtil;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,7 +45,8 @@ import butterknife.OnClick;
 
 public class FamilyGalleryWriteActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
-    private DatabaseReference mDatabase;
+    private FirebaseDatabase mFirebaseDatabase;
+    private FirebaseUser mUser;
 
     private static final int REQUEST_TAKE_PHOTO = 1; //카메라 촬영으로 사진 가져오기
     private static final int REQUEST_TAKE_ALBUM = 2; //앨범에서 사진 가져오기
@@ -42,7 +55,13 @@ public class FamilyGalleryWriteActivity extends AppCompatActivity {
     @BindView(R.id.imageView_gallery_image)
     ImageView imageView;
     @BindView(R.id.edit_text_gallery_content)
-    EditText contentEditText;
+    BootstrapEditText contentEditText;
+    @BindView(R.id.write_button)
+    BootstrapButton writeButton;
+
+    private GalleryItem galleryItem;
+    private User userInfo;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +70,7 @@ public class FamilyGalleryWriteActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setupActionBar();
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
 
         firebaseAuth = FirebaseAuth.getInstance();
         if (firebaseAuth.getCurrentUser() == null) {
@@ -59,7 +78,23 @@ public class FamilyGalleryWriteActivity extends AppCompatActivity {
             startActivity(new Intent(this, SignInActivity.class));
         }
 
-        FirebaseUser user = firebaseAuth.getCurrentUser();
+        mUser = firebaseAuth.getCurrentUser();
+
+        mFirebaseDatabase.getReference()
+                .child("users")
+                .child(mUser.getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        userInfo = new User();
+                        userInfo = dataSnapshot.getValue(User.class);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
 
 
     }
@@ -76,6 +111,7 @@ public class FamilyGalleryWriteActivity extends AppCompatActivity {
             toolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    startActivity(new Intent( FamilyGalleryWriteActivity.this,FamilyGalleryActivity.class));
                     finish();
                 }
             });
@@ -193,5 +229,40 @@ public class FamilyGalleryWriteActivity extends AppCompatActivity {
     private void showImage(Bitmap bitmap) {
         Drawable bitmapDrawable = new BitmapDrawable(getResources(), bitmap);
         imageView.setImageDrawable(bitmapDrawable);
+    }
+
+    @OnClick(R.id.write_button)
+    public void onClickWriteButton(){
+        String content = contentEditText.getText().toString();
+        String photoPath=null;
+        if(photoUri!=null){
+            photoPath=photoUri.toString();
+        }
+
+        if(content.isEmpty()||photoPath.isEmpty()){
+            Toast.makeText(getBaseContext(), "정보를 모두 입력해주세요!", Toast.LENGTH_SHORT).show();
+            return;
+        }else{
+            galleryItem = new GalleryItem();
+            galleryItem.setContent(content);
+            galleryItem.setPhotoPath(photoPath);
+            long time = System.currentTimeMillis();
+            SimpleDateFormat dayTime = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분");
+            galleryItem.setDate(dayTime.format(new Date(time)));
+            galleryItem.setUser(userInfo);
+            galleryItem.setTitle(userInfo.getPatientName()+"님의 가족");
+            galleryItem.setWriter(userInfo.getUserName());
+
+            mFirebaseDatabase.getReference("family_gallery")
+                    .push()
+                    .setValue(galleryItem)
+                    .addOnSuccessListener(FamilyGalleryWriteActivity.this, new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(getBaseContext(),"갤러리 글쓰기 완료", Toast.LENGTH_LONG).show();
+                            startActivity(new Intent( FamilyGalleryWriteActivity.this,FamilyGalleryActivity.class));
+                        }
+                    });
+        }
     }
 }

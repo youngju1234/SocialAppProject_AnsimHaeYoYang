@@ -8,7 +8,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.team14.socialapp.ansimhaeyoyang.model.GalleryItem;
 
 import java.util.ArrayList;
@@ -16,29 +23,47 @@ import java.util.List;
 
 public class FamilyGalleryActivity extends AppCompatActivity {
 
+    private FirebaseDatabase mFirebaseDatabase;
+    private FirebaseAuth mAuth;
+    private FirebaseUser mFirebaseUser;
+    private ArrayList<GalleryItem> galleryItems;
+    private RecyclerView recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_family_gallery);
         setupActionBar();
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+        mAuth = FirebaseAuth.getInstance();
+        mFirebaseUser=mAuth.getCurrentUser();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
 
-        List<GalleryItem> items = new ArrayList<>();
-        GalleryItem[] item = new GalleryItem[4];
-        item[0] = new GalleryItem(R.drawable.family1, "2017/11/17", "1보고싶어요!!", "###님의 가족", "작성자 : 이영주");
-        item[1] = new GalleryItem(R.drawable.family2, "2017/11/16", "2보고싶어요!!", "###님의 가족", "작성자 : 이영주");
-        item[2] = new GalleryItem(R.drawable.family3, "2017/11/15", "3보고싶어요!!", "###님의 가족", "작성자 : 이영주");
-        item[3] = new GalleryItem(R.drawable.family4, "2017/11/14", "4보고싶어요!!", "###님의 가족", "작성자 : 이영주");
 
-        for (int i = 0; i < 4; i++) {
-            items.add(item[i]);
-        }
+        galleryItems = new ArrayList<GalleryItem>();
+        mFirebaseDatabase.getReference("family_gallery")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot gallerySnapshot: dataSnapshot.getChildren()) {
+                            GalleryItem galleryItem =gallerySnapshot.getValue(GalleryItem.class);
+                            galleryItems.add(galleryItem);
 
-        recyclerView.setAdapter(new RecyclerAdapter(getApplicationContext(), items, R.layout.activity_family_gallery));
+                        }
+                        recyclerView.setAdapter(new RecyclerAdapter(getApplicationContext(), galleryItems, R.layout.activity_family_gallery));
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -64,6 +89,7 @@ public class FamilyGalleryActivity extends AppCompatActivity {
             toolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    startActivity(new Intent( FamilyGalleryActivity.this,MainActivity.class));
                     finish();
                 }
             });

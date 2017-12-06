@@ -1,10 +1,12 @@
 package com.team14.socialapp.ansimhaeyoyang.model;
 
+import java.io.Serializable;
+
 /**
  * Created by dudwn on 2017-11-06.
  */
 
-public class User {
+public class User implements Serializable {
     private String userUID;
     private String userEmail;
     private String userName;

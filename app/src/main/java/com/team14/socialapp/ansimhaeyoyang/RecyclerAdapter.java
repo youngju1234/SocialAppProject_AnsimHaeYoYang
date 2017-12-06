@@ -8,14 +8,15 @@ import android.widget.Toast;
 
 import com.team14.socialapp.ansimhaeyoyang.model.GalleryItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
     private Context context;
-    private List<GalleryItem> items;
+    private ArrayList<GalleryItem> items;
     private int item_layout;
 
-    public RecyclerAdapter(Context context, List<GalleryItem> items, int item_layout) {
+    public RecyclerAdapter(Context context, ArrayList<GalleryItem> items, int item_layout) {
         this.context = context;
         this.items = items;
         this.item_layout = item_layout;
@@ -43,7 +44,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return this.items.size();
+        if(items.isEmpty())
+            return 0;
+        else
+            return this.items.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
