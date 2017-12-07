@@ -90,7 +90,7 @@ public class SignUpActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if (task.isSuccessful()) {
-                            Log.e("######################",userInfo.getUserUID());
+                            //Log.e("######################",userInfo.getUserUID());
                             onAuthSuccess(task.getResult().getUser());
                         } else {
                             Toast.makeText(SignUpActivity.this, "SignUp Failed.", Toast.LENGTH_SHORT).show();
