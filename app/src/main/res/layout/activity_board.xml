@@ -16,17 +16,19 @@
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:titleTextColor="#358cff"
         />
-    <ListView
-        android:id="@+id/Boardlistview"
-        android:layout_width="match_parent"
-        android:layout_height="445dp"
+    <!-- A RecyclerView with some commonly used attributes -->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/my_recycler_view"
+        android:layout_marginTop="15dp"
         android:layout_below="@+id/toolbar"
-        android:fastScrollEnabled="true"
-        />
+        android:layout_width="match_parent"
+        android:layout_height="450dp"/>
+
     <Button
         android:id="@+id/button_write_board"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="20dp"
         android:text="글쓰기"
         android:textColor="@android:color/black"
         android:textStyle="bold"
