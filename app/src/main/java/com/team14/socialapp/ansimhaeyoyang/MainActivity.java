@@ -85,8 +85,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onCancelled(DatabaseError databaseError) {
                         Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
                     }
-
-
                 });
 
         buttonLogout.setOnClickListener(this);
@@ -150,6 +148,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @OnClick(R.id.button_menu_yoyang_program)
     public void onClickMenuYoyangProgram() {
-
+        startActivity(new Intent(this, ProgramActivity.class));
     }
 }

@@ -18,48 +18,74 @@
         />
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:text="제목"
-        android:id="@+id/tv_title"
-        android:paddingTop="10dp"
-        />
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        >
-
-        <TextView
-        android:layout_width="350px"
-        android:layout_height="wrap_content"
-        android:text="작성자"
-            android:id="@+id/tv_writer" />
-        <TextView
-            android:layout_width="350px"
-            android:layout_height="wrap_content"
-            android:text="작성일"
-            android:id="@+id/tv_write_date" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.77"
-        android:paddingTop="15dp"
-        >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="내용 : "
-            android:id="@+id/tv_content" />
+            android:text="제목 : "
+            android:id="@+id/tv_title"
+            android:textSize="23sp"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="8dp"
+            android:paddingTop="10dp"
+            />
+        <View style="@style/Divider"/>
 
-    </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:layout_marginBottom="8dp"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="작성자 : "
+                android:textSize="15sp"
+                android:layout_marginLeft="10dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="작성자"
+                android:textSize="15sp"
+                android:layout_marginLeft="60dp"
+                android:id="@+id/tv_writer" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="작성일 : "
+                android:textSize="15sp"
+                android:layout_marginLeft="100dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="작성일"
+                android:textSize="15sp"
+                android:layout_marginLeft="150dp"
+                android:id="@+id/tv_write_date" />
+        </RelativeLayout>
+        <View style="@style/Divider"/>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.77"
+            android:paddingTop="15dp"
+            >
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:scrollbars="vertical"
+                android:text="내용 : "
+                android:id="@+id/tv_content" />
+
+        </LinearLayout>
+
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
