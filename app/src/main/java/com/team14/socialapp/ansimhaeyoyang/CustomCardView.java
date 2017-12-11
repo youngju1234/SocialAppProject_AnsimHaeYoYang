@@ -53,7 +53,6 @@ public class CustomCardView extends CardView {
     }
 
     public void setData(GalleryItem item) {
-        Log.d("########",item.getPhotoPath());
         if (item.getPhotoPath() != null) {
             photoUri = Uri.parse(item.getPhotoPath());
             Glide.with(this.getContext()).load(Uri.parse(item.getPhotoPath())).into(imageView);

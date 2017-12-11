@@ -55,7 +55,12 @@ public class FamilyGalleryActivity extends AppCompatActivity {
                             galleryItems.add(galleryItem);
 
                         }
-                        recyclerView.setAdapter(new RecyclerAdapter(getApplicationContext(), galleryItems, R.layout.activity_family_gallery));
+                        ArrayList<GalleryItem> temp = new ArrayList<GalleryItem>();
+                        for(int i=galleryItems.size()-1;i>0;i--){
+                            temp.add(galleryItems.get(i));
+                        }
+
+                        recyclerView.setAdapter(new RecyclerAdapter(getApplicationContext(), temp, R.layout.activity_family_gallery));
                     }
 
                     @Override
