@@ -22,7 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "MainActivity";
 
     private FirebaseAuth firebaseAuth;
@@ -65,20 +65,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(new Intent(this, SignInActivity.class));
         }
 
-        FirebaseUser user = firebaseAuth.getCurrentUser();
+        final FirebaseUser user = firebaseAuth.getCurrentUser();
 
+        if (user.getUid().equals(Constants.ADMIN_UID)) {
+            textViewPatientName.setText("OOO요양원의");
+            textViewUserName.setText("관리자님");
+        }
 
-        mDatabase
-                .child("users")
-                .child(user.getUid())
+        mDatabase.child("users").child(user.getUid())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
-
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         userInfo = new User();
                         userInfo = dataSnapshot.getValue(User.class);
-                        textViewPatientName.setText(userInfo.getPatientName() + " 님의");
-                        textViewUserName.setText("보호자 " + userInfo.getUserName() + " 님");
+                        if (!user.getUid().equals(Constants.ADMIN_UID)) {
+                            textViewPatientName.setText(userInfo.getPatientName() + " 님의");
+                            textViewUserName.setText("보호자 " + userInfo.getUserName() + " 님");
+                        }
+
                     }
 
                     @Override
@@ -86,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
                     }
                 });
+
 
         buttonLogout.setOnClickListener(this);
 
@@ -138,7 +143,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @OnClick(R.id.button_menu_gallery_patient)
     public void onClickMenuGalleryPatient() {
-
+        startActivity(new Intent(this, PatientGalleryActivity.class));
     }
 
     @OnClick(R.id.button_menu_gallery_family)

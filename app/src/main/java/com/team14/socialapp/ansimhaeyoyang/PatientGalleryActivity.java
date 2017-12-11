@@ -8,7 +8,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -19,10 +18,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.team14.socialapp.ansimhaeyoyang.model.GalleryItem;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class FamilyGalleryActivity extends AppCompatActivity {
-
+public class PatientGalleryActivity extends AppCompatActivity {
     private FirebaseDatabase mFirebaseDatabase;
     private FirebaseAuth mAuth;
     private FirebaseUser mFirebaseUser;
@@ -33,6 +30,7 @@ public class FamilyGalleryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_family_gallery);
+
         setupActionBar();
 
         mAuth = FirebaseAuth.getInstance();
@@ -46,15 +44,16 @@ public class FamilyGalleryActivity extends AppCompatActivity {
 
 
         galleryItems = new ArrayList<GalleryItem>();
-        mFirebaseDatabase.getReference("family_gallery")
+        mFirebaseDatabase.getReference("sanatorium_gallery")
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot gallerySnapshot: dataSnapshot.getChildren()) {
-                            GalleryItem galleryItem = gallerySnapshot.getValue(GalleryItem.class);
+                            GalleryItem galleryItem =gallerySnapshot.getValue(GalleryItem.class);
                             galleryItems.add(galleryItem);
 
                         }
+
                         recyclerView.setAdapter(new RecyclerAdapter(getApplicationContext(), galleryItems, R.layout.activity_family_gallery));
                     }
 
@@ -68,25 +67,23 @@ public class FamilyGalleryActivity extends AppCompatActivity {
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
-        if (!mFirebaseUser.getUid().equals(Constants.ADMIN_UID)) {
+        if (mFirebaseUser.getUid().equals(Constants.ADMIN_UID)) {
+
 
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startActivity(new Intent(FamilyGalleryActivity.this, FamilyGalleryWriteActivity.class));
+                    startActivity(new Intent(PatientGalleryActivity.this, PatientGalleryWriteActivity.class));
                 }
             });
         }else{
             fab.setVisibility(View.GONE);
         }
-
-
     }
-
 
     private void setupActionBar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("보호자 소식");
+        toolbar.setTitle("요양원 소식");
         setSupportActionBar(toolbar);
 
         if (getSupportActionBar() != null) {
@@ -96,12 +93,10 @@ public class FamilyGalleryActivity extends AppCompatActivity {
             toolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent( FamilyGalleryActivity.this,MainActivity.class));
+                    startActivity(new Intent( PatientGalleryActivity.this,MainActivity.class));
                     finish();
                 }
             });
         }
     }
-
-
 }

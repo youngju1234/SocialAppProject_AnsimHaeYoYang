@@ -90,7 +90,6 @@ public class SignUpActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if (task.isSuccessful()) {
-                            //Log.e("######################",userInfo.getUserUID());
                             onAuthSuccess(task.getResult().getUser());
                         } else {
                             Toast.makeText(SignUpActivity.this, "SignUp Failed.", Toast.LENGTH_SHORT).show();
@@ -150,7 +149,6 @@ public class SignUpActivity extends AppCompatActivity {
     private void onAuthSuccess(FirebaseUser user) {
 
         userInfo.setUserUID(user.getUid());
-        Log.e("######################",userInfo.getUserUID());
 
         mDatabase.child("users").child(user.getUid()).setValue(userInfo);
 

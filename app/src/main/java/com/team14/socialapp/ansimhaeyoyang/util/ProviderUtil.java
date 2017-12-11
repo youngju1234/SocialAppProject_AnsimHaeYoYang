@@ -4,7 +4,6 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.v4.content.FileProvider;
-
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -47,14 +46,14 @@ public class ProviderUtil {
   }
 
   private static File getOutputMediaFile() throws IOException {
-    String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-    imageFileName = "IMG_" + timeStamp;
-    File storageDir = new File(imageDirectory, "Camera");
-    File image = File.createTempFile(
-        imageFileName,  /* prefix */
-        ".jpg",         /* suffix */
-        storageDir      /* directory */
-    );
+      String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+      imageFileName = "IMG_" + timeStamp;
+      File storageDir = new File(imageDirectory, "Camera");
+      File image = File.createTempFile(
+            imageFileName,  /* prefix */
+            ".jpg",         /* suffix */
+            storageDir      /* directory */
+        );
 
     outputPath = "file:" + image.getAbsolutePath();
     return image;
