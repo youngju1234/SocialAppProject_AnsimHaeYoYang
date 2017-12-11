@@ -12,6 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,6 +24,7 @@ import com.team14.socialapp.ansimhaeyoyang.model.Board;
 import java.util.ArrayList;
 
 public class BoardActivity extends AppCompatActivity {
+
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -29,35 +32,22 @@ public class BoardActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference myRef;
 
+    private FirebaseAuth mAuth;
+    private FirebaseUser mFirebaseUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board);
         setupActionBar();
-       /* ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, LIST_MENU) ;
-
-        ListView listview = (ListView) findViewById(R.id.Boardlistview) ;
-        listview.setAdapter(adapter) ;
-
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView parent, View v, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), BoardDetailActivity.class);
-                startActivity(intent);
-                finish();
-
-            }
-        }) ;
-*/
         recyclerView = (RecyclerView)  findViewById(R.id.my_recycler_view);
 
+        mAuth = FirebaseAuth.getInstance();
+        mFirebaseUser=mAuth.getCurrentUser();
 
-        //Linear layout manager 사용
         mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(mLayoutManager);
-
-        //어답터 세팅
 
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -68,12 +58,9 @@ public class BoardActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 itemArrayList.clear();
                 for (DataSnapshot fileSnapshot : dataSnapshot.getChildren()) {
-                    //MyFiles filename = (MyFiles) fileSnapshot.getValue(MyFiles.class);
-                    //하위키들의 value를 어떻게 가져오느냐???
-
                     Board readBoard= fileSnapshot.getValue(Board.class);
+                    readBoard.setKey(fileSnapshot.getKey());
                     itemArrayList.add(readBoard);
-
                 }
                 recyclerView.setAdapter(new BoardAdapter(getApplicationContext(), itemArrayList, R.layout.activity_board));
             }
@@ -84,14 +71,20 @@ public class BoardActivity extends AppCompatActivity {
             }
         });
         Button writeboard = (Button)findViewById(R.id.button_write_board);
-        writeboard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), BoardWriteActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+
+        if (!mFirebaseUser.getUid().equals(Constants.ADMIN_UID)) {
+
+            writeboard.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getApplicationContext(), BoardWriteActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+        }else{
+            writeboard.setVisibility(View.GONE);
+        }
     }
 
 

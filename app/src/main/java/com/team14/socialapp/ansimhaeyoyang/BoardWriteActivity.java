@@ -96,11 +96,23 @@ public class BoardWriteActivity extends AppCompatActivity {
                     .addOnSuccessListener(BoardWriteActivity.this, new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Toast.makeText(getBaseContext(),"게시판 글쓰기 완료", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(BoardWriteActivity.this,BoardDetailActivity.class);
-                            intent.putExtra("board_data",board);
-                            startActivity(intent);
-                            finish();
+                            mFirebaseDatabase.getReference("board")
+                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                            for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                                                board.setKey(snapshot.getKey());
+                                            }
+                                            Toast.makeText(getBaseContext(),"게시판 글쓰기 완료", Toast.LENGTH_LONG).show();
+                                            Intent intent = new Intent(BoardWriteActivity.this,BoardDetailActivity.class);
+                                            intent.putExtra("board_data",board);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                        @Override
+                                        public void onCancelled(DatabaseError databaseError) {
+                                        }
+                                    });
                         }
                     });
         }

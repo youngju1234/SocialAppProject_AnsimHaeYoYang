@@ -51,13 +51,7 @@
                 android:textSize="15sp"
                 android:layout_marginLeft="60dp"
                 android:id="@+id/tv_writer" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="작성일 : "
-                android:textSize="15sp"
-                android:layout_marginLeft="100dp"
-                />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
