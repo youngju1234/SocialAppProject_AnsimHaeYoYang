@@ -26,7 +26,7 @@ import java.util.ArrayList;
 public class BoardActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter mAdapter;
+
     private RecyclerView.LayoutManager mLayoutManager;
     private static ArrayList<Board> itemArrayList = new ArrayList<>();
     FirebaseDatabase database;
