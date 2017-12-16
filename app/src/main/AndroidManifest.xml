@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.hardware.camera2"/>
+    <uses-permission android:name="android.hardware.camera2" />
 
     <application
         android:allowBackup="true"
@@ -47,7 +47,8 @@
         <activity android:name=".BoardWriteActivity" />
         <activity android:name=".ProgramActivity" />
         <activity android:name=".PatientGalleryActivity" />
-        <activity android:name=".PatientGalleryWriteActivity"></activity>
+        <activity android:name=".PatientGalleryWriteActivity" />
+        <activity android:name=".ProgramWriteActivity"></activity>
     </application>
 
 </manifest>

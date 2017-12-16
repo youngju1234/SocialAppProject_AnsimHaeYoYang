@@ -2,5 +2,6 @@
     <string name="app_name">AnsimHaeYoYang</string>
     <string name="loading">Loading…</string>
     <string name="adminUID">H0HnAuaplpfTIlMR9IT4fnVuwiG3</string>
+    <string name="title_activity_main2">Main2Activity</string>
 
 </resources>

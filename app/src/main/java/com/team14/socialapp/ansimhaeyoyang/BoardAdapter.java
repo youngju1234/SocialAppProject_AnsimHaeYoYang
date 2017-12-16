@@ -58,7 +58,6 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.ViewHolder> 
                 context.startActivity(intent);
             }
         });
-
     }
 
     @Override
