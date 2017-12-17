@@ -37,7 +37,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         cardView.setUserActionListener(new CustomCardView.UserActionListener() {
             @Override
             public void onImageClicked() {
-                Toast.makeText(context, "image " + position, Toast.LENGTH_SHORT).show();
             }
         });
     }

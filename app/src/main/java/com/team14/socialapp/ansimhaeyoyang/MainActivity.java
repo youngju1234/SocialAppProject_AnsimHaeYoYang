@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (user.getUid().equals(Constants.ADMIN_UID)) {
             textViewPatientName.setText("OOO요양원의");
             textViewUserName.setText("관리자님");
+            buttonMenuYoyangProgram.setText("요양프로그램 관리");
         }
 
         mDatabase.child("users").child(user.getUid())
@@ -153,6 +154,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @OnClick(R.id.button_menu_yoyang_program)
     public void onClickMenuYoyangProgram() {
-        startActivity(new Intent(this, ProgramActivity.class));
+        if (firebaseAuth.getCurrentUser().getUid().equals(Constants.ADMIN_UID)) {
+            startActivity(new Intent(this, AdminProgramActivity.class));
+        }else{
+            startActivity(new Intent(this, ParticipateProgramActivity.class));
+        }
     }
 }

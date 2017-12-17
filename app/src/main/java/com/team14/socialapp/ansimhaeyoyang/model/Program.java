@@ -1,60 +1,36 @@
 package com.team14.socialapp.ansimhaeyoyang.model;
 
-
-/**
- * Created by YB on 2017-12-12.
- */
+import java.util.ArrayList;
 
 public class Program {
+    private String key;
     private String date;
     private String time;
-    private String program_name;
-    private int num;
-    private String content;
-    private String manager;
-    private String subject;
+    private String title;
+    private String detail;
+    private String managerName;
+    private String place;
+    private ArrayList<User> participants;
 
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getManager() {
-        return manager;
-    }
-
-    public void setManager(String manager) {
-        this.manager = manager;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
     public Program() {
     }
-    public Program(String date, String time, String program_name, int num) {
+
+    public Program(String date, String time, String title, String detail, String managerName, String place, ArrayList<User> participants) {
         this.date = date;
         this.time = time;
-        this.program_name = program_name;
-        this.num = num;
+        this.title = title;
+        this.detail = detail;
+        this.managerName = managerName;
+        this.place = place;
+        this.participants = participants;
     }
 
-    public Program(String date, String time, String program_name, int num, String content, String manager, String subject) {
-        this.date = date;
-        this.time = time;
-        this.program_name = program_name;
-        this.num = num;
-        this.content = content;
-        this.manager = manager;
-        this.subject = subject;
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getDate() {
@@ -65,28 +41,51 @@ public class Program {
         this.date = date;
     }
 
+    public String getTime() {
+        return time;
+    }
+
     public void setTime(String time) {
         this.time = time;
     }
 
-    public void setProgram_name(String program_name) {
-        this.program_name = program_name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setNum(int num) {
-        this.num = num;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getTime() {
-
-        return time;
+    public String getDetail() {
+        return detail;
     }
 
-    public String getProgram_name() {
-        return program_name;
+    public void setDetail(String detail) {
+        this.detail = detail;
     }
 
-    public int getNum() {
-        return num;
+    public String getManagerName() {
+        return managerName;
+    }
+
+    public void setManagerName(String managerName) {
+        this.managerName = managerName;
+    }
+
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
+    }
+
+    public ArrayList<User> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(ArrayList<User> participants) {
+        this.participants = participants;
     }
 }
