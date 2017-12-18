@@ -2,6 +2,7 @@ package com.team14.socialapp.ansimhaeyoyang.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Program implements Serializable {
     private String key;
@@ -11,19 +12,9 @@ public class Program implements Serializable {
     private String detail;
     private String managerName;
     private String place;
-    private ArrayList<User> participants;
+    private ArrayList<User> users;
 
     public Program() {
-    }
-
-    public Program(String date, String time, String title, String detail, String managerName, String place, ArrayList<User> participants) {
-        this.date = date;
-        this.time = time;
-        this.title = title;
-        this.detail = detail;
-        this.managerName = managerName;
-        this.place = place;
-        this.participants = participants;
     }
 
     public String getKey() {
@@ -82,11 +73,11 @@ public class Program implements Serializable {
         this.place = place;
     }
 
-    public ArrayList<User> getParticipants() {
-        return participants;
+    public ArrayList<User> getUsers() {
+        return users;
     }
 
-    public void setParticipants(ArrayList<User> participants) {
-        this.participants = participants;
+    public void setUsers(ArrayList<User> users) {
+        this.users = users;
     }
 }

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -19,6 +20,7 @@ import com.team14.socialapp.ansimhaeyoyang.model.Program;
 import com.team14.socialapp.ansimhaeyoyang.model.User;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHolder> {
     private Context context;
@@ -29,12 +31,23 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHold
     private User userInfo;
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase mFirebaseDatabase;
+    private List<Boolean> flags = new ArrayList<>();
 
     public ProgramAdapter(Context context, ArrayList<Program> items, int item_layout , int type) {
         this.context = context;
         this.items = items;
         this.item_layout = item_layout;
         this.type = type;
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
+    }
+
+    public ProgramAdapter(Context context, ArrayList<Program> items,List<Boolean> flags, int item_layout , int type) {
+        this.context = context;
+        this.items = items;
+        this.item_layout = item_layout;
+        this.type = type;
+        this.flags=flags;
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
     }
@@ -78,8 +91,13 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHold
         holder.time.setText(items.get(position).getTime());
         holder.title.setText(items.get(position).getTitle());
 
-        if(items.get(position).getParticipants()!=null)
-            holder.participant_num.setText(items.get(position).getParticipants().size());
+        if(!flags.isEmpty()){
+            if (flags.get(position))
+                holder.participate.setBackgroundResource(R.drawable.ic_favorite_black_24dp);
+        }
+
+        if(items.get(position).getUsers()!=null)
+            holder.participant_num.setText(items.get(position).getUsers().size()+" 명");
 
         if(type==1){
             holder.delete.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +111,13 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHold
             holder.participate.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mFirebaseDatabase.getReference("program/"+items.get(position).getKey()+"/participants").push().setValue(userInfo);
+                    if(flags.get(position)){
+                        mFirebaseDatabase.getReference("program/"+items.get(position).getKey()+"/participants/"+userInfo.getUserUID()).removeValue();
+                        flags.set(position,false);
+                    }else{
+                        mFirebaseDatabase.getReference("program/"+items.get(position).getKey()+"/participants/"+userInfo.getUserUID()).setValue(userInfo);
+                        flags.set(position,true);
+                    }
                 }
             });
         }

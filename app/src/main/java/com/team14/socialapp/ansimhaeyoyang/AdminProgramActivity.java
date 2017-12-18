@@ -8,12 +8,14 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.team14.socialapp.ansimhaeyoyang.model.Program;
+import com.team14.socialapp.ansimhaeyoyang.model.User;
 
 import java.util.ArrayList;
 
@@ -49,7 +51,13 @@ public class AdminProgramActivity extends AppCompatActivity {
                 itemArrayList.clear();
                 for (DataSnapshot fileSnapshot : dataSnapshot.getChildren()) {
                     Program p=  fileSnapshot.getValue(Program.class);
+                    ArrayList<User> users = new ArrayList();
+                    for (DataSnapshot s : fileSnapshot.child("participants").getChildren()) {
+                        User u = s.getValue(User.class);
+                        users.add(u);
+                    }
                     p.setKey(fileSnapshot.getKey());
+                    p.setUsers(users);
                     itemArrayList.add(p);
                 }
                 recyclerView.setAdapter(new ProgramAdapter(getApplicationContext(), itemArrayList, R.layout.activity_admin_program,1));

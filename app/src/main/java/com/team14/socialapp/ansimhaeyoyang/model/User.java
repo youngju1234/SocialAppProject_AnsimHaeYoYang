@@ -1,6 +1,10 @@
 package com.team14.socialapp.ansimhaeyoyang.model;
 
+import com.google.firebase.database.Exclude;
+
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by dudwn on 2017-11-06.
@@ -70,4 +74,5 @@ public class User implements Serializable {
     public void setUserUID(String userUID) {
         this.userUID = userUID;
     }
+
 }

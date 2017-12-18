@@ -8,16 +8,21 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.team14.socialapp.ansimhaeyoyang.model.Program;
 import com.team14.socialapp.ansimhaeyoyang.model.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,6 +35,7 @@ public class ParticipateProgramActivity extends AppCompatActivity {
 
     private RecyclerView.LayoutManager mLayoutManager;
     private static ArrayList<Program> itemArrayList = new ArrayList<>();
+    private List<Boolean> flags;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,17 +55,28 @@ public class ParticipateProgramActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 itemArrayList.clear();
+                int i = 0;
+                flags = new ArrayList<Boolean>();
                 for (DataSnapshot fileSnapshot : dataSnapshot.getChildren()) {
                     Program p = fileSnapshot.getValue(Program.class);
-                    p.setKey(fileSnapshot.getKey());
-                    itemArrayList.add(p);
-
-                    List<User> list = new ArrayList<User>();
-                    for (DataSnapshot child: dataSnapshot.getChildren()) {
-                        list.add(child.getValue(User.class));
+                    ArrayList<User> users = new ArrayList();
+                    for (DataSnapshot s : fileSnapshot.child("participants").getChildren()) {
+                        User u = s.getValue(User.class);
+                        users.add(u);
+                        if (u.getUserUID().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                            flags.add(true);
+                        }
                     }
+                    p.setKey(fileSnapshot.getKey());
+                    p.setUsers(users);
+                    itemArrayList.add(p);
+                    if (flags.size() == i) {
+                        flags.add(false);
+                    }
+                    i++;
                 }
-                recyclerView.setAdapter(new ProgramAdapter(getApplicationContext(), itemArrayList, R.layout.activity_participate_program, 2));
+
+                recyclerView.setAdapter(new ProgramAdapter(getApplicationContext(), itemArrayList, flags, R.layout.activity_participate_program, 2));
             }
 
             @Override

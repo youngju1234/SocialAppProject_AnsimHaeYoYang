@@ -128,7 +128,7 @@ public class AdminAddProgramActivity extends AppCompatActivity {
         p.setManagerName(managerEditText.getText().toString());
         p.setKey(null);
         ArrayList<User> users = new ArrayList<>();
-        p.setParticipants(users);
+        //p.setParticipants(users);
         firebaseDatabase.getReference("program").push().setValue(p);
 
         Toast.makeText(getBaseContext(),"요양 프로그램 추가 완료", Toast.LENGTH_LONG).show();
