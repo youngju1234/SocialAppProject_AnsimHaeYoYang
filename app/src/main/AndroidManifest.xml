@@ -45,10 +45,11 @@
         <activity android:name=".BoardActivity" />
         <activity android:name=".BoardDetailActivity" />
         <activity android:name=".BoardWriteActivity" />
-        <activity android:name=".ProgramActivity" />
         <activity android:name=".PatientGalleryActivity" />
         <activity android:name=".PatientGalleryWriteActivity" />
-        <activity android:name=".ProgramWriteActivity"></activity>
+        <activity android:name=".AdminProgramActivity" />
+        <activity android:name=".AdminAddProgramActivity" />
+        <activity android:name=".ParticipateProgramActivity"></activity>
     </application>
 
 </manifest>

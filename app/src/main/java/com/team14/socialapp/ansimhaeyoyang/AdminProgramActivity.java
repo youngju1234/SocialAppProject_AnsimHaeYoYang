@@ -1,57 +1,58 @@
 package com.team14.socialapp.ansimhaeyoyang;
 
 import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
 
-import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.team14.socialapp.ansimhaeyoyang.model.Board;
 import com.team14.socialapp.ansimhaeyoyang.model.Program;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ProgramActivity extends AppCompatActivity {
+public class AdminProgramActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
+    @BindView(R.id.admin_program_recycler_view)
+    RecyclerView recyclerView;
 
     private RecyclerView.LayoutManager mLayoutManager;
     private static ArrayList<Program> itemArrayList = new ArrayList<>();
-    FirebaseDatabase database;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_program);
+        setContentView(R.layout.activity_admin_program);
+        ButterKnife.bind(this);
         setupActionBar();
-        recyclerView = (RecyclerView)  findViewById(R.id.prgram_recycler_view);
+
         mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(mLayoutManager);
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference databaseRef = database.getReference("program");
 
-       databaseRef.addValueEventListener(new ValueEventListener() {
+        databaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 itemArrayList.clear();
                 for (DataSnapshot fileSnapshot : dataSnapshot.getChildren()) {
                     Program p=  fileSnapshot.getValue(Program.class);
+                    p.setKey(fileSnapshot.getKey());
                     itemArrayList.add(p);
                 }
-                recyclerView.setAdapter(new ProgramAdapter(getApplicationContext(), itemArrayList, R.layout.activity_program));
+                recyclerView.setAdapter(new ProgramAdapter(getApplicationContext(), itemArrayList, R.layout.activity_admin_program,1));
             }
 
             @Override
@@ -60,20 +61,10 @@ public class ProgramActivity extends AppCompatActivity {
             }
         });
 
-        FloatingActionButton writeprogram = (FloatingActionButton)findViewById(R.id.fab);
-        writeprogram.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ProgramWriteActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
     }
     private void setupActionBar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("요양 프로그램 안내");
+        toolbar.setTitle("요양 프로그램 관리");
         setSupportActionBar(toolbar);
 
         if (getSupportActionBar() != null) {
@@ -89,4 +80,10 @@ public class ProgramActivity extends AppCompatActivity {
         }
     }
 
+    @OnClick(R.id.fab)
+    public void onclickAddProgram(){
+        Intent intent = new Intent(getApplicationContext(), AdminAddProgramActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

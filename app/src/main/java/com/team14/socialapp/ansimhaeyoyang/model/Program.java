@@ -1,8 +1,9 @@
 package com.team14.socialapp.ansimhaeyoyang.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Program {
+public class Program implements Serializable {
     private String key;
     private String date;
     private String time;
