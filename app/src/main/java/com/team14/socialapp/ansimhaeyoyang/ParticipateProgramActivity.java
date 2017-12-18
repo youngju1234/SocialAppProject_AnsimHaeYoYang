@@ -76,7 +76,7 @@ public class ParticipateProgramActivity extends AppCompatActivity {
                     i++;
                 }
 
-                recyclerView.setAdapter(new ProgramAdapter(getApplicationContext(), itemArrayList, flags, R.layout.activity_participate_program, 2));
+                recyclerView.setAdapter(new ProgramAdapter(ParticipateProgramActivity.this, itemArrayList, flags, R.layout.activity_participate_program, 2));
             }
 
             @Override

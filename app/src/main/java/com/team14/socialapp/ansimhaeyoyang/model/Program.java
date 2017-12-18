@@ -80,4 +80,14 @@ public class Program implements Serializable {
     public void setUsers(ArrayList<User> users) {
         this.users = users;
     }
+
+    @Override
+    public String toString() {
+        return "프로그램명 : " + title + '\n' +
+                "일시 : " + date + '\n' +
+                "시간 : " + time + '\n' +
+                "장소 : " + place + '\n' +
+                "세부 활동 내용 : " + detail + '\n' +
+                "담당자 : " + managerName + '\n';
+    }
 }

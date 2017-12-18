@@ -56,10 +56,21 @@
                 android:textStyle="bold"
                 android:textSize="13dp"
                 android:textAlignment="center"
-                android:layout_weight="0.4"
+                android:layout_weight="0.2"
                 android:id="@+id/item_participant_num"
                 android:layout_gravity="center"
                 android:text="0"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="13dp"
+                android:textAlignment="center"
+                android:layout_weight="0.2"
+                android:id="@+id/item_more"
+                android:layout_gravity="center"
+                android:text="상세보기"/>
 
             <Button
                 android:id="@+id/item_delete"

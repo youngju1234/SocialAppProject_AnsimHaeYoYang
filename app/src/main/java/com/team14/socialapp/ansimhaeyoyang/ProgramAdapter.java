@@ -1,6 +1,7 @@
 package com.team14.socialapp.ansimhaeyoyang;
 
 import android.content.Context;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -96,8 +97,36 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHold
                 holder.participate.setBackgroundResource(R.drawable.ic_favorite_black_24dp);
         }
 
-        if(items.get(position).getUsers()!=null)
+        if(items.get(position).getUsers()!=null){
             holder.participant_num.setText(items.get(position).getUsers().size()+" 명");
+
+            holder.participant_num.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String data="";
+                    for(User u : items.get(position).getUsers()){
+                        data += u.getPatientName()+"님의 보호자\n";
+                    }
+                    AlertDialog dialog = new AlertDialog.Builder(context).setTitle("참여자 현황")
+                            .setMessage(data).setNegativeButton("닫기",null).create();
+
+                    dialog.setCanceledOnTouchOutside(true);
+                    dialog.show();
+                }
+            });
+
+        }
+
+        holder.more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog dialog = new AlertDialog.Builder(context).setTitle("프로그램 상세 정보")
+                        .setMessage(items.get(position).toString()).setNegativeButton("닫기",null).create();
+
+                dialog.setCanceledOnTouchOutside(true);
+                dialog.show();
+            }
+        });
 
         if(type==1){
             holder.delete.setOnClickListener(new View.OnClickListener() {
@@ -139,12 +168,14 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHold
         TextView time;
         Button delete;
         Button participate;
+        TextView more;
         public ViewHolder(View v) {
             super(v);
             date = (TextView) v.findViewById(R.id.item_date);
             time = (TextView) v.findViewById(R.id.item_time);
             title = (TextView) v.findViewById(R.id.item_title);
             participant_num = (TextView) v.findViewById(R.id.item_participant_num);
+            more = (TextView)v.findViewById(R.id.item_more);
             if(type==1)
                 delete = (Button) v.findViewById(R.id.item_delete);
             if(type==2)

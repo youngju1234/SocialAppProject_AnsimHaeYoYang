@@ -60,7 +60,7 @@ public class AdminProgramActivity extends AppCompatActivity {
                     p.setUsers(users);
                     itemArrayList.add(p);
                 }
-                recyclerView.setAdapter(new ProgramAdapter(getApplicationContext(), itemArrayList, R.layout.activity_admin_program,1));
+                recyclerView.setAdapter(new ProgramAdapter(AdminProgramActivity.this, itemArrayList, R.layout.activity_admin_program,1));
             }
 
             @Override
